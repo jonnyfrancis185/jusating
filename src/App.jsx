@@ -1,15 +1,18 @@
+import { useState } from 'react';
+
 export default function App() {
+  const [advice, setAdvice] = useState('');
+
   async function getAdvice() {
     const result = await fetch('https://api.adviceslip.com/advice');
-    const advice = await result.json();
+    const data = await result.json();
 
-    console.log(advice);
+    setAdvice(data.slip.advice);
   }
 
   return (
     <>
-      <h1>test</h1>
-      <p>juice</p>
+      <h2>{advice}</h2>
       <button onClick={getAdvice}>Get Advice</button>
     </>
   );
